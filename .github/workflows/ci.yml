@@ -1,0 +1,27 @@
+name: ring-io CI & Benchmark Suite
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Install Compilers & Toolchains
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y clang make liburing-dev
+
+    - name: Compile Library & Benchmarks
+      run: make all CC=clang
+
+    - name: Run Submission Queue Invariant Tests
+      run: ./bin_test
+
+    - name: Run High-Throughput I/O Benchmark
+      run: ./bin_bench
