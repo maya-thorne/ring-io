@@ -1,5 +1,14 @@
 <div align="center">
 
+<p align="center">
+  <strong>🇺🇸 English</strong> · <a href="./docs/locales/ko.md">🇰🇷 한국어</a> · <a href="./docs/locales/zh-CN.md">🇨🇳 中文</a> · <a href="./docs/locales/es.md">🇪🇸 Español</a> · <a href="./docs/locales/hi.md">🇮🇳 हिन्दी</a><br />
+  <a href="./docs/locales/ar.md">🇸🇦 العربية</a> · <a href="./docs/locales/pt-BR.md">🇧🇷 Português</a> · <a href="./docs/locales/ru.md">🇷🇺 Русский</a> · <a href="./docs/locales/fr.md">🇫🇷 Français</a> · <a href="./docs/locales/id.md">🇮🇩 Bahasa Indonesia</a>
+</p>
+
+<p align="center">
+  <img src="./docs/assets/locales/en/banner.svg" alt="ring-io banner" width="100%" />
+</p>
+
 # ⚡ ring-io
 
 **High-Throughput, Zero-Overhead Asynchronous I/O Engine via Linux io_uring (C23)**
