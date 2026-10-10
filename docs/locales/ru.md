@@ -30,22 +30,22 @@
 
 ```mermaid
 flowchart LR
-    subgraph Userspace ["Userspace Application"]
-        App["Event Loop / Worker Thread"]
-        SQ["Submission Queue (SQ Ring)"]
-        CQ["Completion Queue (CQ Ring)"]
+    subgraph Userspace ["Приложение пространства пользователя"]
+        App["Цикл событий / Рабочий поток"]
+        SQ["Очередь отправки (Кольцо SQ)"]
+        CQ["Очередь завершения (Кольцо CQ)"]
     end
 
-    subgraph Kernel ["Linux Kernel (5.10+)"]
-        KernelThread["io_uring Kernel Thread (SQPOLL)"]
-        Storage["NVMe / Direct Socket Fabric"]
+    subgraph Kernel ["Ядро Linux (5.10+)"]
+        KernelThread["Поток ядра io_uring (SQPOLL)"]
+        Storage["NVMe / Прямая сокетная фабрика"]
     end
 
-    App -->|Push Entry| SQ
-    SQ -->|Kernel Polling / Syscall-less| KernelThread
-    KernelThread -->|Zero-Copy I/O| Storage
-    Storage -->|Post Completion| CQ
-    CQ -->|Batch Harvest| App
+    App -->|Добавление записи| SQ
+    SQ -->|Опрос ядром / Без си스вызовов| KernelThread
+    KernelThread -->|Zero-Copy ввод-вывод| Storage
+    Storage -->|Публикация завершения| CQ
+    CQ -->|Пакетный сбор| App
 ```
 
 ### Ключевые инженерные особенности

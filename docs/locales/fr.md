@@ -30,22 +30,22 @@
 
 ```mermaid
 flowchart LR
-    subgraph Userspace ["Userspace Application"]
-        App["Event Loop / Worker Thread"]
-        SQ["Submission Queue (SQ Ring)"]
-        CQ["Completion Queue (CQ Ring)"]
+    subgraph Userspace ["Application Espace Utilisateur"]
+        App["Boucle d'Événements / Thread Ouvrier"]
+        SQ["File de Soumission (Anneau SQ)"]
+        CQ["File de Complétion (Anneau CQ)"]
     end
 
-    subgraph Kernel ["Linux Kernel (5.10+)"]
-        KernelThread["io_uring Kernel Thread (SQPOLL)"]
-        Storage["NVMe / Direct Socket Fabric"]
+    subgraph Kernel ["Noyau Linux (5.10+)"]
+        KernelThread["Thread Noyau io_uring (SQPOLL)"]
+        Storage["NVMe / Tissu de Sockets Directs"]
     end
 
-    App -->|Push Entry| SQ
-    SQ -->|Kernel Polling / Syscall-less| KernelThread
-    KernelThread -->|Zero-Copy I/O| Storage
-    Storage -->|Post Completion| CQ
-    CQ -->|Batch Harvest| App
+    App -->|Pousser Entrée| SQ
+    SQ -->|Scrutation Noyau / Sans Syscall| KernelThread
+    KernelThread -->|E/S Zéro Copie| Storage
+    Storage -->|Publier Complétion| CQ
+    CQ -->|Récolte par Lots| App
 ```
 
 ### Fonctionnalités Clés d’Ingénierie

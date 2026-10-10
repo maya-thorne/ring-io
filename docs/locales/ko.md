@@ -30,22 +30,22 @@
 
 ```mermaid
 flowchart LR
-    subgraph Userspace ["Userspace Application"]
-        App["Event Loop / Worker Thread"]
-        SQ["Submission Queue (SQ Ring)"]
-        CQ["Completion Queue (CQ Ring)"]
+    subgraph Userspace ["유저스페이스 애플리케이션"]
+        App["이벤트 루프 / 워커 스레드"]
+        SQ["제출 큐 (SQ 링)"]
+        CQ["완료 큐 (CQ 링)"]
     end
 
-    subgraph Kernel ["Linux Kernel (5.10+)"]
-        KernelThread["io_uring Kernel Thread (SQPOLL)"]
-        Storage["NVMe / Direct Socket Fabric"]
+    subgraph Kernel ["리눅스 커널 (5.10+)"]
+        KernelThread["io_uring 커널 스레드 (SQPOLL)"]
+        Storage["NVMe / 다이렉트 소켓 패브릭"]
     end
 
-    App -->|Push Entry| SQ
-    SQ -->|Kernel Polling / Syscall-less| KernelThread
-    KernelThread -->|Zero-Copy I/O| Storage
-    Storage -->|Post Completion| CQ
-    CQ -->|Batch Harvest| App
+    App -->|엔트리 등록| SQ
+    SQ -->|커널 폴링 / 시스템콜 배제| KernelThread
+    KernelThread -->|제로 카피 I/O| Storage
+    Storage -->|완료 통지 게시| CQ
+    CQ -->|배치 수확| App
 ```
 
 ### 핵심 엔지니어링 기능

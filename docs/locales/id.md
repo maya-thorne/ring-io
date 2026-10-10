@@ -30,22 +30,22 @@
 
 ```mermaid
 flowchart LR
-    subgraph Userspace ["Userspace Application"]
-        App["Event Loop / Worker Thread"]
-        SQ["Submission Queue (SQ Ring)"]
-        CQ["Completion Queue (CQ Ring)"]
+    subgraph Userspace ["Aplikasi Userspace"]
+        App["Event Loop / Thread Pekerja"]
+        SQ["Antrean Pengiriman (Cincin SQ)"]
+        CQ["Antrean Penyelesaian (Cincin CQ)"]
     end
 
-    subgraph Kernel ["Linux Kernel (5.10+)"]
-        KernelThread["io_uring Kernel Thread (SQPOLL)"]
-        Storage["NVMe / Direct Socket Fabric"]
+    subgraph Kernel ["Kernel Linux (5.10+)"]
+        KernelThread["Thread Kernel io_uring (SQPOLL)"]
+        Storage["NVMe / Fabric Soket Langsung"]
     end
 
-    App -->|Push Entry| SQ
-    SQ -->|Kernel Polling / Syscall-less| KernelThread
-    KernelThread -->|Zero-Copy I/O| Storage
-    Storage -->|Post Completion| CQ
-    CQ -->|Batch Harvest| App
+    App -->|Dorong Entri| SQ
+    SQ -->|Polling Kernel / Bebas Syscall| KernelThread
+    KernelThread -->|I/O Nol-Salinan| Storage
+    Storage -->|Kirim Penyelesaian| CQ
+    CQ -->|Panen Batch| App
 ```
 
 ### Fitur Rekayasa Utama

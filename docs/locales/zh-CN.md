@@ -30,22 +30,22 @@
 
 ```mermaid
 flowchart LR
-    subgraph Userspace ["Userspace Application"]
-        App["Event Loop / Worker Thread"]
-        SQ["Submission Queue (SQ Ring)"]
-        CQ["Completion Queue (CQ Ring)"]
+    subgraph Userspace ["用户空间应用程序"]
+        App["事件循环 / 工作线程"]
+        SQ["提交队列 (SQ 环)"]
+        CQ["完成队列 (CQ 环)"]
     end
 
-    subgraph Kernel ["Linux Kernel (5.10+)"]
-        KernelThread["io_uring Kernel Thread (SQPOLL)"]
-        Storage["NVMe / Direct Socket Fabric"]
+    subgraph Kernel ["Linux 内核 (5.10+)"]
+        KernelThread["io_uring 内核线程 (SQPOLL)"]
+        Storage["NVMe / 直连套接字架构"]
     end
 
-    App -->|Push Entry| SQ
-    SQ -->|Kernel Polling / Syscall-less| KernelThread
-    KernelThread -->|Zero-Copy I/O| Storage
-    Storage -->|Post Completion| CQ
-    CQ -->|Batch Harvest| App
+    App -->|推入条目| SQ
+    SQ -->|内核轮询 / 无系统调用| KernelThread
+    KernelThread -->|零拷贝 I/O| Storage
+    Storage -->|提交完成事件| CQ
+    CQ -->|批量收割| App
 ```
 
 ### 核心工程特性

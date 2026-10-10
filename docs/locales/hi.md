@@ -30,22 +30,22 @@
 
 ```mermaid
 flowchart LR
-    subgraph Userspace ["Userspace Application"]
-        App["Event Loop / Worker Thread"]
-        SQ["Submission Queue (SQ Ring)"]
-        CQ["Completion Queue (CQ Ring)"]
+    subgraph Userspace ["यूज़रस्पेस एप्लिकेशन"]
+        App["इवेंट लूप / वर्कर थ्रेड"]
+        SQ["सबमिशन कतार (SQ रिंग)"]
+        CQ["कंपलीशन कतार (CQ रिंग)"]
     end
 
-    subgraph Kernel ["Linux Kernel (5.10+)"]
-        KernelThread["io_uring Kernel Thread (SQPOLL)"]
-        Storage["NVMe / Direct Socket Fabric"]
+    subgraph Kernel ["लिनक्स कर्नेल (5.10+)"]
+        KernelThread["io_uring कर्नेल थ्रेड (SQPOLL)"]
+        Storage["NVMe / डायरेक्ट सॉकेट फैब्रिक"]
     end
 
-    App -->|Push Entry| SQ
-    SQ -->|Kernel Polling / Syscall-less| KernelThread
-    KernelThread -->|Zero-Copy I/O| Storage
-    Storage -->|Post Completion| CQ
-    CQ -->|Batch Harvest| App
+    App -->|एंट्री जोड़ें| SQ
+    SQ -->|कर्नेल पोलिंग / सिसकॉल-रहित| KernelThread
+    KernelThread -->|ज़ीरो-कॉपी I/O| Storage
+    Storage -->|समाप्ति पोस्ट करें| CQ
+    CQ -->|बैच संचयन| App
 ```
 
 ### प्रमुख इंजीनियरिंग विशेषताएं

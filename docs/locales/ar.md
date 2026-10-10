@@ -30,22 +30,22 @@
 
 ```mermaid
 flowchart LR
-    subgraph Userspace ["Userspace Application"]
-        App["Event Loop / Worker Thread"]
-        SQ["Submission Queue (SQ Ring)"]
-        CQ["Completion Queue (CQ Ring)"]
+    subgraph Userspace ["تطبيق مساحة المستخدم"]
+        App["حلقة الأحداث / خيط المعالجة"]
+        SQ["طابور الإرسال (حلقة SQ)"]
+        CQ["طابور الاكتمال (حلقة CQ)"]
     end
 
-    subgraph Kernel ["Linux Kernel (5.10+)"]
-        KernelThread["io_uring Kernel Thread (SQPOLL)"]
-        Storage["NVMe / Direct Socket Fabric"]
+    subgraph Kernel ["نواة لينكس (5.10+)"]
+        KernelThread["خيط نواة io_uring (SQPOLL)"]
+        Storage["NVMe / نسيج المقابس المباشرة"]
     end
 
-    App -->|Push Entry| SQ
-    SQ -->|Kernel Polling / Syscall-less| KernelThread
-    KernelThread -->|Zero-Copy I/O| Storage
-    Storage -->|Post Completion| CQ
-    CQ -->|Batch Harvest| App
+    App -->|إدراج إدخال| SQ
+    SQ -->|استطلاع النواة / بدون نداء نظام| KernelThread
+    KernelThread -->|إدخال/إخراج بدون نسخ| Storage
+    Storage -->|نشر الاكتمال| CQ
+    CQ -->|حصد دفعي| App
 ```
 
 ### الميزات الهندسية الأساسية
