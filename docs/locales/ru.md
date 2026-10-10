@@ -6,7 +6,7 @@
 </p>
 
 <p align="center">
-  <img src="../assets/locales/ru/banner.svg" alt="ring-io banner (ru)" width="100%" />
+  <a href="https://github.com/maya-thorne/ring-io"><img src="../assets/locales/ru/banner.svg" alt="ring-io banner (ru)" width="100%" /></a>
 </p>
 
 # ⚡ ring-io
