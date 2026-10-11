@@ -59,6 +59,10 @@ flowchart LR
 
 ## 📊 Benchmarks
 
+<details open>
+<summary><b>📊 View Benchmark Metrics &amp; epoll Comparison</b></summary>
+<br>
+
 Benchmark executing **1,000,000 asynchronous read operations** with batch size 64 comparing `ring-io` against standard `epoll` baseline:
 
 | Metric | Legacy `epoll` | `ring-io` (io_uring Default) | `ring-io` (SQPOLL Enabled) | Speedup |
@@ -67,10 +71,15 @@ Benchmark executing **1,000,000 asynchronous read operations** with batch size 6
 | **Average Latency** | 1,219 ns | 467 ns | **350 ns** | **-71.2%** |
 | **Syscall Frequency** | 1 syscall / op | 1 syscall / 64 ops | **0 syscalls** (Steady) | **Bypassed** |
 | **CPU Cache Misses (L1-D)**| 4.2% | 1.1% | **0.6%** | **-85.7%** |
+</details>
 
 ---
 
 ## 🛠️ Quickstart
+
+<details open>
+<summary><b>🛠️ View Prerequisites &amp; Build Commands</b></summary>
+<br>
 
 ### Prerequisites
 - Linux Kernel 5.10+ (Recommended: 6.x)
@@ -93,10 +102,15 @@ make run-test
 # Execute high-throughput benchmark
 make run-bench
 ```
+</details>
 
 ---
 
 ## 💻 Code Example
+
+<details open>
+<summary><b>💻 View C23 Bare-Metal Asynchronous I/O Implementation Example</b></summary>
+<br>
 
 ```c
 #include "ring_io.h"
@@ -125,6 +139,7 @@ int main(void) {
     return 0;
 }
 ```
+</details>
 
 ---
 
